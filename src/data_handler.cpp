@@ -1,4 +1,4 @@
-#include "../include/data_handler.hpp"
+#include "data_handler.h"
   
 data_handler::data_handler(){
   data_array = new std::vector<data *>;
