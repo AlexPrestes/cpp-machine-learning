@@ -8,13 +8,14 @@
 #include <string>
 #include <map>
 #include <unordered_set>
+#include <memory>
 
 
 class data_handler {
-  std::vector<data *> *data_array;
-  std::vector<data *> *training_data;
-  std::vector<data *> *test_data;
-  std::vector<data *> *validation_data;
+  std::shared_ptr< std::vector< std::shared_ptr<data> > > data_array;
+  std::shared_ptr< std::vector< std::shared_ptr<data> > > training_data;
+  std::shared_ptr< std::vector< std::shared_ptr<data> > > test_data;
+  std::shared_ptr< std::vector< std::shared_ptr<data> > > validation_data;
 
   int num_classes;
   int feature_vector_size;
@@ -35,9 +36,9 @@ class data_handler {
 
   uint32_t convert_to_little_endian(const unsigned char* bytes);
 
-  std::vector<data *> * get_training_data();
-  std::vector<data *> * get_test_data();
-  std::vector<data *> * get_validation_data();
+  std::shared_ptr<std::vector<std::shared_ptr<data> > >  get_training_data();
+  std::shared_ptr<std::vector<std::shared_ptr<data> > >  get_test_data();
+  std::shared_ptr<std::vector<std::shared_ptr<data> > >  get_validation_data();
 
 };
 

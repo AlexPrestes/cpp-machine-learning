@@ -1,10 +1,10 @@
 #include "data_handler.h"
   
 data_handler::data_handler(){
-  data_array = new std::vector<data *>;
-  training_data = new std::vector<data *>;
-  test_data = new std::vector<data *>;
-  validation_data = new std::vector<data *>;
+  data_array = std::unique_ptr<std::vector<std::shared_ptr<data> > >(new std::vector<std::shared_ptr<data>>);
+  training_data = std::unique_ptr<std::vector<std::shared_ptr<data> > > (new std::vector<std::shared_ptr<data>>);
+  test_data = std::unique_ptr<std::vector<std::shared_ptr<data> > >(new std::vector<std::shared_ptr<data>>);
+  validation_data = std::unique_ptr<std::vector<std::shared_ptr<data> > >(new std::vector<std::shared_ptr<data>>);
 }
 data_handler::~data_handler(){}
 
@@ -21,7 +21,7 @@ void data_handler::read_feature_vector(std::string path){
     printf("Done getting Input File Header.\n");
     int image_size = header[2]*header[3];
     for(int i = 0; i < (int)header[1]; i++){
-      data *d = new data();
+      std::shared_ptr<data> d = std::shared_ptr<data>(new data());
       uint8_t element[1];
       for(int j = 0; j < image_size; j++){
         if(fread(element, sizeof(element), 1, f)){
@@ -135,23 +135,12 @@ uint32_t data_handler::convert_to_little_endian(const unsigned char* bytes){
                       (bytes[3]));
 }
 
-std::vector<data *> * data_handler::get_training_data(){
+std::shared_ptr<std::vector<std::shared_ptr<data> > >  data_handler::get_training_data(){
   return training_data;
 }
-std::vector<data *> * data_handler::get_test_data(){
+std::shared_ptr<std::vector<std::shared_ptr<data> > >  data_handler::get_test_data(){
   return test_data;
 }
-std::vector<data *> * data_handler::get_validation_data(){
+std::shared_ptr<std::vector<std::shared_ptr<data> > >  data_handler::get_validation_data(){
   return validation_data;
-}
-
-
-
-
-int main() {
-  data_handler *dh = new data_handler();
-  dh->read_feature_vector("./mnist/train-images.idx3-ubyte");
-  dh->read_feature_labels("./mnist/train-labels.idx1-ubyte");
-  dh->split_data();
-  dh->count_classes();
 }

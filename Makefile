@@ -2,7 +2,7 @@ CPP_MACHINE_LEARNING_ROOT := $(PWD)
 CC=g++
 INCLUDE_DIR := $(CPP_MACHINE_LEARNING_ROOT)/include
 SRC := $(CPP_MACHINE_LEARNING_ROOT)/src
-CFLAGS := -std=c++17 -Wall -Wextra -Wpedantic -O2
+CFLAGS := -shared -std=c++17 -Wall -Wextra -Wpedantic -O2
 LIB_DATA := libdata.so
 
 all := $(LIB_DATA)
@@ -26,4 +26,3 @@ obj/data.o : $(SRC)/data.cpp
 clean :
 	rm -r $(CPP_MACHINE_LEARNING_ROOT)/lib
 	rm -r $(CPP_MACHINE_LEARNING_ROOT)/obj
-

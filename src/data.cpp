@@ -1,13 +1,13 @@
 #include "data.h"
 
 data::data(){
-  feature_vector = new std::vector<uint8_t>;
+  feature_vector = std::shared_ptr< std::vector<uint8_t> >(new std::vector<uint8_t>);
 }
 data::~data(){
-  
+  // NOTHING TO DO
 }
 
-void data::set_feature_vector(std::vector<uint8_t> *vect){
+void data::set_feature_vector(std::shared_ptr< std::vector<uint8_t> > vect){
   feature_vector = vect;
 }
 void data::append_to_feature_vector(uint8_t val){
@@ -33,6 +33,6 @@ uint8_t data::get_enumerated_label(){
   return enum_label;
 }
 
-std::vector<uint8_t> * data::get_feature_vector(){
+std::shared_ptr< std::vector<uint8_t> > data::get_feature_vector(){
   return feature_vector;
 }
