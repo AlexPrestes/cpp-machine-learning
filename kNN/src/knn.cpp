@@ -35,7 +35,7 @@ void knn::find_knearest(std::shared_ptr<data> query_point){
       min = std::numeric_limits<double>::max();
     } else {
       for(unsigned int j = 0; j < training_data->size(); j++){
-        double distance = calculate_distance(query_point, training_data->at(j));
+        double distance = training_data->at(j)->get_distance();
         if(distance < previous_min && distance < min){
           min = distance;
           index = j;
@@ -87,7 +87,7 @@ double knn::calculate_distance(std::shared_ptr<data> query_point, std::shared_pt
   }
 #ifdef EUCLID
   for(int i = 0; i < query_point->get_feature_vector_size(); i++){
-    distance = pow(query_point->get_feature_vector()->at(i) - input->get_feature_vector()->at(i), 2);
+    distance += pow(query_point->get_feature_vector()->at(i) - input->get_feature_vector()->at(i), 2);
   }
   distance = sqrt(distance);
 #elif defined MANHATTAN

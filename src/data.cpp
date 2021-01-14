@@ -36,3 +36,7 @@ uint8_t data::get_enumerated_label(){
 std::shared_ptr< std::vector<uint8_t> > data::get_feature_vector(){
   return feature_vector;
 }
+
+double data::get_distance(){
+  return distance;
+}

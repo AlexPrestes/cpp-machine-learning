@@ -26,6 +26,8 @@ class data {
   uint8_t get_enumerated_label();
 
   std::shared_ptr< std::vector<uint8_t> > get_feature_vector();
+
+  double get_distance();
 };
 
 
